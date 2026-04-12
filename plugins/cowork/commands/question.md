@@ -1,0 +1,53 @@
+---
+description: Ask both Claude and Codex the same question — each researches independently, then synthesize
+---
+
+The user has a question they want answered by both you (Claude) and Codex (GPT-5 via the `codex:codex-rescue` agent) independently, then synthesized into one answer.
+
+**Question from the user:** $ARGUMENTS
+
+Unlike `/cowork`, this is not a design-and-implement protocol. It is a research protocol: both agents investigate the question using whatever tools they have, then you synthesize the two answers into one.
+
+---
+
+## Round 1 — Independent research (parallel)
+
+Simultaneously, in a single message with two tool calls:
+
+1. **Your answer (Answer A):** Research the question yourself. Use your tools — read project files, grep code, run commands, fetch URLs, whatever the question requires. Arrive at your own conclusion. Keep it to ~200–400 words. Be specific and cite evidence (file paths, command output, URLs).
+
+2. **Codex's answer (Answer B):** Spawn `codex:codex-rescue` with the question verbatim. Tell Codex:
+   - "Answer this question independently. You have full access to the project filesystem and the network."
+   - "Read any project files you need. Run CLI commands, curl endpoints, check documentation — use your tools to arrive at an evidence-based answer."
+   - "Do not guess when you can verify. If the answer is in a file, read it. If it requires a network call, make it."
+   - "Keep your answer to ~200–400 words. Cite evidence: file paths, command output, URLs."
+   - **This is a fresh thread.**
+
+Neither answer should see the other in this round.
+
+## Round 2 — Synthesis
+
+Read both answers. Produce a single synthesized response:
+
+- **Synthesized answer** — the unified answer, written as one coherent response.
+- **Where they agreed** — the claims both agents independently confirmed.
+- **Where they disagreed** — any conflicts, with your assessment of which is correct and why (cite the evidence each agent provided).
+- **Evidence quality** — note which claims are backed by direct evidence (file contents, command output, API responses) vs which are reasoning or inference.
+
+If the two answers are substantially identical, say so briefly and present the shared answer without padding.
+
+## Round 3 — Codex verification (optional, only if disagreements exist)
+
+If Round 2 found substantive disagreements, spawn `codex:codex-rescue` with `--resume` and ask Codex to verify the specific disputed claims. Paste Claude's evidence and ask Codex to confirm or refute with its own evidence.
+
+If no disagreements, skip this round.
+
+---
+
+## Rules
+
+- **Both agents must do their own research.** Do not pre-digest the answer for Codex. Give it the raw question and let it investigate independently.
+- **Codex should use the network.** If the question could benefit from checking an API, fetching a URL, running a CLI tool, or querying a service, tell Codex to do so. Codex has full network access.
+- **Codex should use the filesystem.** If the answer is in a project file, Codex should read it itself rather than receiving it pre-pasted.
+- Keep the synthesis concise. If both agents agree, one paragraph is enough.
+- If Codex is unavailable, tell the user and provide Claude's answer alone with a note that it was not cross-verified.
