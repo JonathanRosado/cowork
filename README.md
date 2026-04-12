@@ -68,45 +68,24 @@ All existing Codex commands work unchanged: `/codex:rescue`, `/codex:review`, `/
 
 ### Step 1 — Remove the upstream OpenAI Codex plugin (if installed)
 
-This collection includes a drop-in replacement for the official Codex plugin. If you have the original installed, remove it first to avoid conflicts:
+This collection includes a drop-in replacement for the official Codex plugin. If you have the original installed, remove it first to avoid conflicts.
+
+### Step 2 — Install
 
 ```
-/plugins
-# find the openai-codex entry and uninstall it
-```
-
-### Step 2 — Add the marketplace
-
-```
-/install-plugin JonathanRosado/cowork
-```
-
-If the above command doesn't register the marketplace automatically, add it manually. Open `~/.claude/settings.json` and add:
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "cowork": {
-      "source": {
-        "source": "github",
-        "repo": "JonathanRosado/cowork"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "codex@cowork": true,
-    "cowork@cowork": true
-  }
-}
-```
-
-### Step 3 — Reload
-
-```
+/plugin marketplace add JonathanRosado/cowork
+/plugin install codex@cowork
+/plugin install cowork@cowork
 /reload-plugins
 ```
 
-You should see both plugins loaded. Verify with `/cowork:question what project is this?` — Codex should read your files and answer without manual context.
+### Step 3 — Verify
+
+```
+/cowork:question what project is this?
+```
+
+Codex should read your project files and answer without you pasting any context.
 
 ## How the agents collaborate
 
