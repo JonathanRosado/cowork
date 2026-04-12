@@ -6,6 +6,10 @@ The user wants a solution co-designed and co-implemented by you (Claude) and Cod
 
 **Problem statement from the user:** $ARGUMENTS
 
+Before starting Round 1, announce to the user: "The protocol will determine the primary implementation agent based on which agent's thinking dominates the converged plan. **To override this, say `claude implements` or `codex implements` at any point before or during the design rounds.** If no override is given, the protocol's provenance routing decides."
+
+Check whether the user's problem statement already includes an implementation agent override (e.g. "codex implements" or "claude implements" anywhere in $ARGUMENTS). If so, note it and use that override regardless of provenance routing.
+
 This command has two modes depending on whether plan mode is already active. **Do not call `EnterPlanMode` yourself** — that decision belongs to the user.
 
 ---
@@ -16,6 +20,23 @@ Check whether plan mode is currently active.
 
 - **Plan mode active** → follow the **Design protocol** (Rounds 1–4) and stop. Output a converged plan. No implementation.
 - **Plan mode not active** → follow the **Design protocol** (Rounds 1–4), then **implement** the converged plan (routed to the primary architect), then follow the **Settlement protocol** (Rounds 5–7) where both agents review the implementation.
+
+---
+
+## Context preamble (before Round 1)
+
+Before starting the design rounds, generate a short context summary for Codex. Since Codex cannot see the conversation history, this summary ensures it has awareness of key decisions and constraints already established.
+
+**To avoid wasting tokens on summarization, spawn a Haiku agent** (set `model: "haiku"` on the Agent tool) with the following prompt: "Summarize the key decisions, constraints, and context from this conversation that are relevant to the following problem: [problem statement]. Include only decisions already made, constraints the user has established, and relevant prior conclusions. 3–5 bullets, under 150 words. Do not include recommendations — only established facts and decisions."
+
+Store the returned summary as the **context preamble**. Include it at the top of every Codex prompt for the remainder of this protocol, formatted as:
+
+```
+**Prior context (established in this session):**
+[summary bullets]
+```
+
+If the conversation has no meaningful prior context (e.g. the user's first message is the `/cowork` invocation), skip this step.
 
 ---
 
@@ -78,11 +99,10 @@ Spawn `codex:codex-rescue` with `--resume` and the full synthesis. Ask: "Do you 
 
 Present the converged plan to the user. Include:
 - A short "how we got here" trail (2–4 bullets)
-- The **primary architect** tag and which agent will implement
-- A note: **"To override the implementation agent, reply with `claude implements` or `codex implements`."**
+- The **primary architect** tag and which agent will implement (or the user's override, if one was given)
 
 - **If plan mode is active:** stop here. The user reviews the plan and decides when to exit plan mode.
-- **If plan mode is not active:** wait for the user to either accept or override the implementation agent. Then move to the Implementation phase.
+- **If plan mode is not active:** proceed directly to the Implementation phase. Use the user's override if one was given during the design rounds; otherwise use the tagged primary architect. Do not wait for user confirmation — implementation flows automatically after design converges. The user can still hand off mid-implementation by saying `switch to claude`, `switch to codex`, or `I'll take over`.
 
 ---
 
