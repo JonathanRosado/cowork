@@ -1,9 +1,0 @@
-{
-  "name": "co-design",
-  "version": "0.2.0",
-  "description": "Co-design protocol: Claude and Codex draft, critique, synthesize, sign off, and — outside plan mode — implement and settle.",
-  "author": {
-    "name": "Jonathan Rosado",
-    "url": "https://github.com/JonathanRosado"
-  }
-}

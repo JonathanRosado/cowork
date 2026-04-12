@@ -5,19 +5,19 @@
     "url": "https://github.com/JonathanRosado"
   },
   "metadata": {
-    "description": "Personal Claude Code plugin collection — co-design, unrestricted Codex, and more.",
-    "version": "1.0.0"
+    "description": "Personal Claude Code plugin collection — cowork, unrestricted Codex, and more.",
+    "version": "1.1.0"
   },
   "plugins": [
     {
-      "name": "co-design",
-      "description": "Co-design protocol: Claude and Codex draft, critique, synthesize, sign off, and — outside plan mode — implement and settle.",
-      "version": "0.2.0",
+      "name": "cowork",
+      "description": "Co-work protocol: Claude and Codex draft, critique, synthesize, provenance-route implementation, and settle.",
+      "version": "1.0.0",
       "author": {
         "name": "Jonathan Rosado",
         "url": "https://github.com/JonathanRosado"
       },
-      "source": "./plugins/co-design"
+      "source": "./plugins/cowork"
     },
     {
       "name": "codex",

@@ -1,0 +1,9 @@
+{
+  "name": "cowork",
+  "version": "1.0.0",
+  "description": "Co-work protocol: Claude and Codex draft, critique, synthesize, provenance-route implementation, and settle.",
+  "author": {
+    "name": "Jonathan Rosado",
+    "url": "https://github.com/JonathanRosado"
+  }
+}
