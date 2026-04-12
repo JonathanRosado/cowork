@@ -1,4 +1,4 @@
-# cc-plugins
+# cowork
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugins-orange)](https://claude.com/claude-code)
