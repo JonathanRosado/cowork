@@ -1,0 +1,33 @@
+{
+  "name": "cc-plugins",
+  "owner": {
+    "name": "Jonathan Rosado",
+    "url": "https://github.com/JonathanRosado"
+  },
+  "metadata": {
+    "description": "Personal Claude Code plugin collection — co-design, unrestricted Codex, and more.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "co-design",
+      "description": "Co-design protocol: Claude and Codex draft, critique, synthesize, sign off, and — outside plan mode — implement and settle.",
+      "version": "0.2.0",
+      "author": {
+        "name": "Jonathan Rosado",
+        "url": "https://github.com/JonathanRosado"
+      },
+      "source": "./plugins/co-design"
+    },
+    {
+      "name": "codex",
+      "description": "Forked Codex plugin — no sandbox, project-aware. Drop-in replacement for openai/codex-plugin-cc.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Jonathan Rosado",
+        "url": "https://github.com/JonathanRosado"
+      },
+      "source": "./plugins/codex"
+    }
+  ]
+}
