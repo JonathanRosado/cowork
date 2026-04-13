@@ -1,12 +1,12 @@
 ---
-description: Review recent implementation with both Claude and Codex — parallel assessment, synthesis, optional fix cycle
+description: Claude implements, then both agents review — quick implementation with two-agent post-review
 ---
 
-Both agents (you and Codex) independently review an existing implementation, then synthesize findings into a consolidated assessment with optional fixes.
+Claude implements the requested changes, then both agents (Claude and Codex) independently review the result and synthesize findings into a consolidated assessment with optional fixes.
 
-**Review focus from the user:** $ARGUMENTS
+**Task from the user:** $ARGUMENTS
 
-Unlike `/cowork`, there are no design rounds — this command starts from existing code. Unlike `/codex:rescue`, this is a two-agent synthesized review, not a single-agent pass. The review anchors against three things: the session context (`.cowork-session.md`), the actual code changes, and the user's review focus above.
+Unlike `/cowork`, there are no design rounds — Claude implements directly, then the two-agent review protocol runs on the result. This is the "fast path": Claude's judgment on implementation, both agents' judgment on review. Use this when the task is clear enough that design rounds would be overhead but you still want rigorous post-implementation review.
 
 ---
 
@@ -44,17 +44,16 @@ If the conversation has no meaningful prior context and no `.cowork-session.md` 
 
 ---
 
-## Change-scope gathering (before Round 1)
+## Implementation phase (before Round 1)
 
-Before spawning any reviews, gather evidence of what was implemented:
+Implement the task described in `$ARGUMENTS` using standard Claude Code workflow: write code, run commands, verify behavior. Work through it methodically. No design rounds, no Codex involvement — this is Claude's direct implementation.
 
-1. Run `git status --short` to see modified/untracked files.
-2. Run `git diff` (staged + unstaged) to get the actual changes.
-3. If `$ARGUMENTS` is vague ("review the recent changes"), also run `git log --oneline -10` to identify relevant commits.
-4. If `$ARGUMENTS` names specific files, focus the diff on those.
-5. Build a **change manifest**: a compact list of files changed and the nature of each change. This replaces the "converged plan" as the review anchor.
+When implementation is complete, gather a **change manifest** for the review:
 
-If no code changes are detected and `$ARGUMENTS` does not name specific files to review, tell the user there is nothing to review and stop.
+1. Run `git status --short` and `git diff` to capture what changed.
+2. Build a compact summary: files modified, nature of each change.
+
+This manifest anchors the review rounds that follow.
 
 ---
 
