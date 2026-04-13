@@ -1,12 +1,12 @@
 ---
-description: Claude implements, then both agents review — quick implementation with two-agent post-review
+description: Claude implements, then both agents review — implementation followed by two-agent post-review
 ---
 
 Claude implements the requested changes, then both agents (Claude and Codex) independently review the result and synthesize findings into a consolidated assessment with optional fixes.
 
 **Task from the user:** $ARGUMENTS
 
-Unlike `/cowork`, there are no design rounds — Claude implements directly, then the two-agent review protocol runs on the result. This is the "fast path": Claude's judgment on implementation, both agents' judgment on review. Use this when the task is clear enough that design rounds would be overhead but you still want rigorous post-implementation review.
+Unlike `/cowork`, there are no design rounds — Claude implements first, then the two-agent review protocol runs on the result. The implementation should be thorough and complete. The review phase ensures both agents independently verify quality, correctness, and alignment with project decisions.
 
 ---
 
