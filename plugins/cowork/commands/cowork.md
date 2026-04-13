@@ -29,7 +29,7 @@ Codex cannot see the conversation history. To give it shared context, maintain a
 
 **Step 1 — Read:** Check if `.cowork-session.md` exists. If it does, read it.
 
-**Step 2 — Update:** Review the existing content (if any) against your current conversation context. Append any NEW items under the appropriate category. Do not rewrite existing entries — only add what's new since the last update. If the file doesn't exist, create it from scratch.
+**Step 2 — Update:** Review the existing content (if any) against your current conversation context. For each existing entry, check whether it has been superseded by a newer decision — if so, update or remove it. Then append any NEW items under the appropriate category. The file must reflect the current state of decisions, not a chronological log. If the file doesn't exist, create it from scratch.
 
 Use this exact structure:
 
