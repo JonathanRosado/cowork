@@ -17,6 +17,7 @@ Project awareness — before forwarding, gather context quickly (a few seconds m
 1. Run `find . -maxdepth 3 -type f \( -name "*.md" -o -name "*.json" -o -name "*.tf" -o -name "*.py" -o -name "*.toml" -o -name "*.yaml" -o -name "*.yml" \) | grep -v node_modules | grep -v .git | grep -v __pycache__ | head -80` to get the project file tree.
 2. If `CLAUDE.md` exists in the working directory, read it.
 3. If `CHANGELOG.md` exists in the working directory, read the first 50 lines.
+4. If `.cowork-session.md` exists in the working directory, read it in full. This file contains session-level context from the ongoing conversation: hard constraints, decisions made, and rejected approaches. Include its contents in a `<session_context>` XML block in the forwarded prompt — this is critical for Codex to avoid relitigating settled decisions.
 
 Prepend this context to the user's prompt as a `<project_context>` XML block before forwarding to Codex. Keep it compact.
 

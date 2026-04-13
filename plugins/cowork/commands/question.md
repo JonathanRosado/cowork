@@ -10,20 +10,37 @@ Unlike `/cowork`, this is not a design-and-implement protocol. It is a research 
 
 ---
 
-## Context preamble (before Round 1)
+## Session context (before Round 1)
 
-Before starting research, generate a short context summary for Codex. Since Codex cannot see the conversation history, this summary ensures it has awareness of key decisions and constraints already established.
+Codex cannot see the conversation history. To give it shared context, maintain a session context file at `.cowork-session.md` in the working directory.
 
-Write a brief summary yourself — 3–5 bullets, under 150 words. Include only decisions already made, constraints the user has established, and relevant prior conclusions. Do not include recommendations — only established facts and decisions. Do not spawn a subagent for this; you already have the conversation context.
+**Step 1 — Read:** Check if `.cowork-session.md` exists. If it does, read it.
 
-Store this as the **context preamble**. Include it at the top of the Codex prompt in Round 1, formatted as:
+**Step 2 — Update:** Review the existing content (if any) against your current conversation context. Append any NEW items under the appropriate category. Do not rewrite existing entries — only add what's new since the last update. If the file doesn't exist, create it from scratch.
+
+Use this exact structure:
+
+```markdown
+## Hard constraints
+- [things Codex MUST follow — user directives, non-negotiable requirements]
+
+## Decisions made
+- [what's been decided and should not be relitigated]
+
+## Rejected approaches
+- [what was considered, and why it was dropped]
+```
+
+Each entry should be one line, specific and self-contained. Write entries so they make sense without surrounding context.
+
+**Step 3 — Include:** Include the full content of `.cowork-session.md` at the top of the Codex prompt in Round 1, inside a fenced block:
 
 ```
-**Prior context (established in this session):**
-[summary bullets]
+**Session context (from prior conversation):**
+[full contents of .cowork-session.md]
 ```
 
-If the conversation has no meaningful prior context (e.g. the user's first message is the `/cowork:question` invocation), skip this step.
+If the conversation has no meaningful prior context (e.g. the user's first message is the `/cowork:question` invocation and no `.cowork-session.md` exists), skip this step.
 
 ---
 
