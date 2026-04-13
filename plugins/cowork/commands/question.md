@@ -14,9 +14,9 @@ Unlike `/cowork`, this is not a design-and-implement protocol. It is a research 
 
 Before starting research, generate a short context summary for Codex. Since Codex cannot see the conversation history, this summary ensures it has awareness of key decisions and constraints already established.
 
-**To avoid wasting tokens on summarization, spawn a Haiku agent** (set `model: "haiku"` on the Agent tool) with the following prompt: "Summarize the key decisions, constraints, and context from this conversation that are relevant to the following question: [question]. Include only decisions already made, constraints the user has established, and relevant prior conclusions. 3–5 bullets, under 150 words. Do not include recommendations — only established facts and decisions."
+Write a brief summary yourself — 3–5 bullets, under 150 words. Include only decisions already made, constraints the user has established, and relevant prior conclusions. Do not include recommendations — only established facts and decisions. Do not spawn a subagent for this; you already have the conversation context.
 
-Store the returned summary as the **context preamble**. Include it at the top of the Codex prompt in Round 1, formatted as:
+Store this as the **context preamble**. Include it at the top of the Codex prompt in Round 1, formatted as:
 
 ```
 **Prior context (established in this session):**
