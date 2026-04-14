@@ -76,7 +76,7 @@ Simultaneously, in a single message with two tool calls:
 
 1. **Your review (Review A):** Review the changes against (a) the session context, (b) the user's review focus, (c) general best practices. Structure as: what looks correct, what raises concerns (name files and line ranges), code smells, potential issues. ~200–300 words. Be honest — the goal is quality, not defending the implementation.
 
-2. **Codex's review (Review B):** Spawn `codex:codex-rescue` with a fresh thread. Include in the prompt:
+2. **Codex's review (Review B):** Spawn `cowork:codex-rescue` with a fresh thread. Include in the prompt:
    - The session context (from `.cowork-session.md`) in the standard fenced block
    - The change manifest (files changed, key diffs — keep it compact, under 500 lines)
    - The user's review focus
@@ -103,7 +103,7 @@ Fix the flagged issues using standard Claude Code workflow. Keep fixes tightly s
 
 ## Round 4 — Re-review (only if Round 3 applied fixes)
 
-Spawn `codex:codex-rescue` with `--resume`. Include the list of issues raised and how each was fixed. Ask: "The following issues were raised and fixed: [list]. Do you agree the implementation is now sound, or do you have remaining objections? Be specific."
+Spawn `cowork:codex-rescue` with `--resume`. Include the list of issues raised and how each was fixed. Ask: "The following issues were raised and fixed: [list]. Do you agree the implementation is now sound, or do you have remaining objections? Be specific."
 
 - If Codex signs off: present the settlement summary.
 - If Codex still objects: note the unresolved objection, present both the implementation and the objection to the user, and let the user decide. Do not loop further.

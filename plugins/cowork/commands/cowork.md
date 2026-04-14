@@ -2,7 +2,7 @@
 description: Co-work with Codex — independent drafts, mutual critique, provenance-routed implementation, settlement
 ---
 
-The user wants a solution co-designed and co-implemented by you (Claude) and Codex (GPT-5 via the `codex:codex-rescue` agent).
+The user wants a solution co-designed and co-implemented by you (Claude) and Codex (GPT-5 via the `cowork:codex-rescue` agent).
 
 **Problem statement from the user:** $ARGUMENTS
 
@@ -82,7 +82,7 @@ Announce each round to the user in one short sentence before starting it.
 Simultaneously, in a single message with two tool calls:
 
 1. Draft your own approach (Approach A) — do this as your own thinking, do not write it to a file. Keep it to ~200–400 words covering: goal, high-level approach, key design decisions, risks.
-2. Spawn the `codex:codex-rescue` agent with a self-contained prompt asking Codex to draft an independent approach (Approach B) to the same problem. Give Codex the problem statement verbatim plus any relevant repo context you have gathered. Explicitly tell Codex: "Do not implement. Return a ~200–400 word proposal covering goal, approach, key design decisions, and risks. You are one of two agents co-working on this; a second proposal will be generated independently." **This is a fresh thread.**
+2. Spawn the `cowork:codex-rescue` agent with a self-contained prompt asking Codex to draft an independent approach (Approach B) to the same problem. Give Codex the problem statement verbatim plus any relevant repo context you have gathered. Explicitly tell Codex: "Do not implement. Return a ~200–400 word proposal covering goal, approach, key design decisions, and risks. You are one of two agents co-working on this; a second proposal will be generated independently." **This is a fresh thread.**
 
 Neither draft should see the other in this round.
 
@@ -91,7 +91,7 @@ Neither draft should see the other in this round.
 In a single message with one tool call (you critique B yourself; Codex critiques A via the agent):
 
 1. Write your critique of Approach B: what it gets right, what it misses, what constraints it overlooks, what you would borrow from it. Be specific and fair — the goal is convergence, not winning.
-2. Spawn `codex:codex-rescue` with `--fresh` and Approach A pasted in full, asking Codex to critique it against Approach B with the same framing: strengths, gaps, borrowings, specific objections. Tell Codex this is round 2 of a co-work protocol. **This must be a fresh thread** to prevent anchoring to Round 1.
+2. Spawn `cowork:codex-rescue` with `--fresh` and Approach A pasted in full, asking Codex to critique it against Approach B with the same framing: strengths, gaps, borrowings, specific objections. Tell Codex this is round 2 of a co-work protocol. **This must be a fresh thread** to prevent anchoring to Round 1.
 
 ### Round 3 — Synthesis + provenance tagging
 
@@ -107,7 +107,7 @@ Keep the synthesis tight — it is a plan, not an essay.
 
 ### Round 4 — Sign-off (resume Codex thread)
 
-Spawn `codex:codex-rescue` with `--resume` and the full synthesis. Ask: "Do you agree with this converged plan, or do you have substantive objections? If objections, be specific — state what to change and why. If you agree, say so plainly." Tell Codex this is the sign-off round and its thread is being resumed so it has continuity from its Round 2 critique.
+Spawn `cowork:codex-rescue` with `--resume` and the full synthesis. Ask: "Do you agree with this converged plan, or do you have substantive objections? If objections, be specific — state what to change and why. If you agree, say so plainly." Tell Codex this is the sign-off round and its thread is being resumed so it has continuity from its Round 2 critique.
 
 - If Codex signs off: present the synthesis to the user as the final converged plan, with a one-line note that Codex signed off.
 - If Codex pushes back substantively: incorporate the pushback into a revised synthesis, note the revision in a short "revision after sign-off" section, and present the revised plan to the user. Do not loop again — one revision is the cap.
@@ -130,7 +130,7 @@ Present the converged plan to the user. Include:
 The **primary architect** from Round 3 implements by default. The user can override at any time:
 
 - `claude implements` → Claude implements (standard Claude Code workflow).
-- `codex implements` → forward the converged plan to `codex:codex-rescue` with `--resume --write`: "Implement this converged plan. You have full context from prior rounds. Work through it methodically — write code, run tests, verify behavior."
+- `codex implements` → forward the converged plan to `cowork:codex-rescue` with `--resume --write`: "Implement this converged plan. You have full context from prior rounds. Work through it methodically — write code, run tests, verify behavior."
 - `switch to claude` / `switch to codex` / `I'll take over` → mid-implementation handoff. Acknowledge in one sentence and continue with the new agent (or stop and let the user work).
 - No override → use the tagged primary architect.
 
@@ -151,7 +151,7 @@ The implementation is done. Now both agents review it and converge on whether it
 In a single message with two tool calls:
 
 1. Review your own implementation against the converged plan. List: (a) what was implemented as planned, (b) any deviations and why, (c) anything you would change on a second pass. Keep it to ~200 words. Be honest — the goal is quality, not defending your work.
-2. Spawn `codex:codex-rescue` with `--resume` and a description of what was implemented (files changed, key decisions). Ask Codex: "Review this implementation against the converged plan. You have context from all prior rounds. List what's correct, what deviates, and any code smells or issues. Be specific — name files and concerns. ~200–300 words."
+2. Spawn `cowork:codex-rescue` with `--resume` and a description of what was implemented (files changed, key decisions). Ask Codex: "Review this implementation against the converged plan. You have context from all prior rounds. List what's correct, what deviates, and any code smells or issues. Be specific — name files and concerns. ~200–300 words."
 
 ### Round 6 — Settle
 
@@ -161,7 +161,7 @@ Read both reviews. If both agree the implementation is sound:
 
 If either review raises substantive issues:
 - Fix the issues (using whichever agent is currently implementing, or switching per the user's preference).
-- Spawn `codex:codex-rescue` with `--resume` and the fixes applied, asking: "The following issues were raised and fixed: [list]. Do you agree the implementation now meets the plan, or do you have remaining objections?" This is Round 7.
+- Spawn `cowork:codex-rescue` with `--resume` and the fixes applied, asking: "The following issues were raised and fixed: [list]. Do you agree the implementation now meets the plan, or do you have remaining objections?" This is Round 7.
 
 ### Round 7 — Final settlement (only if Round 6 raised issues)
 

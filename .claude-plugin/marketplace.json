@@ -5,29 +5,19 @@
     "url": "https://github.com/JonathanRosado"
   },
   "metadata": {
-    "description": "Personal Claude Code plugin collection — cowork, unrestricted Codex, and more.",
-    "version": "1.1.0"
+    "description": "Personal Claude Code plugin collection — cowork with bundled unrestricted Codex runtime.",
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "cowork",
-      "description": "Co-work protocol: Claude and Codex draft, critique, synthesize, provenance-route implementation, and settle.",
-      "version": "1.0.0",
+      "description": "Co-work protocol for Claude + Codex: independent drafts, mutual critique, provenance-routed implementation, settlement. Bundles a forked unrestricted Codex runtime (no sandbox, project-aware, Windows-safe spawn).",
+      "version": "1.2.0",
       "author": {
         "name": "Jonathan Rosado",
         "url": "https://github.com/JonathanRosado"
       },
       "source": "./plugins/cowork"
-    },
-    {
-      "name": "codex",
-      "description": "Forked Codex plugin — no sandbox, project-aware. Drop-in replacement for openai/codex-plugin-cc.",
-      "version": "1.1.0",
-      "author": {
-        "name": "Jonathan Rosado",
-        "url": "https://github.com/JonathanRosado"
-      },
-      "source": "./plugins/codex"
     }
   ]
 }

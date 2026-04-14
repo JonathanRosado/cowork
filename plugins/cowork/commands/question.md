@@ -2,7 +2,7 @@
 description: Ask both Claude and Codex the same question — each researches independently, then synthesize
 ---
 
-The user has a question they want answered by both you (Claude) and Codex (GPT-5 via the `codex:codex-rescue` agent) independently, then synthesized into one answer.
+The user has a question they want answered by both you (Claude) and Codex (GPT-5 via the `cowork:codex-rescue` agent) independently, then synthesized into one answer.
 
 **Question from the user:** $ARGUMENTS
 
@@ -50,7 +50,7 @@ Simultaneously, in a single message with two tool calls:
 
 1. **Your answer (Answer A):** Research the question yourself. Use your tools — read project files, grep code, run commands, fetch URLs, whatever the question requires. Arrive at your own conclusion. Keep it to ~200–400 words. Be specific and cite evidence (file paths, command output, URLs).
 
-2. **Codex's answer (Answer B):** Spawn `codex:codex-rescue` with the question verbatim. Tell Codex:
+2. **Codex's answer (Answer B):** Spawn `cowork:codex-rescue` with the question verbatim. Tell Codex:
    - "Answer this question independently. You have full access to the project filesystem and the network."
    - "Read any project files you need. Run CLI commands, curl endpoints, check documentation — use your tools to arrive at an evidence-based answer."
    - "Do not guess when you can verify. If the answer is in a file, read it. If it requires a network call, make it."
@@ -72,7 +72,7 @@ If the two answers are substantially identical, say so briefly and present the s
 
 ## Round 3 — Codex verification (optional, only if disagreements exist)
 
-If Round 2 found substantive disagreements, spawn `codex:codex-rescue` with `--resume` and ask Codex to verify the specific disputed claims. Paste Claude's evidence and ask Codex to confirm or refute with its own evidence.
+If Round 2 found substantive disagreements, spawn `cowork:codex-rescue` with `--resume` and ask Codex to verify the specific disputed claims. Paste Claude's evidence and ask Codex to confirm or refute with its own evidence.
 
 If no disagreements, skip this round.
 
