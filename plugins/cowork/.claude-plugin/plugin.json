@@ -1,7 +1,7 @@
 {
   "name": "cowork",
   "version": "1.2.0",
-  "description": "Co-work protocol for Claude + Codex: independent drafts, mutual critique, provenance-routed implementation, settlement. Bundles a forked unrestricted Codex runtime (no sandbox, project-aware, Windows-safe spawn). Provides agent cowork:codex-rescue and slash commands /cowork:cowork, /cowork:question, /cowork:review, /cowork:rescue, /cowork:setup, /cowork:code-review, /cowork:status, /cowork:cancel, /cowork:result, /cowork:adversarial-review.",
+  "description": "Co-work protocol for Claude + Codex: independent drafts, mutual critique, provenance-routed implementation, settlement. Bundles a forked unrestricted Codex runtime with no sandbox, rescue-agent project context handoff, and Windows compatibility fixes. Provides agent cowork:codex-rescue and slash commands /cowork:cowork, /cowork:question, /cowork:review, /cowork:rescue, /cowork:setup, /cowork:code-review, /cowork:status, /cowork:cancel, /cowork:result, /cowork:adversarial-review.",
   "author": {
     "name": "Jonathan Rosado",
     "url": "https://github.com/JonathanRosado"
@@ -10,6 +10,6 @@
     "name": "OpenAI",
     "repo": "openai/codex-plugin-cc",
     "version": "1.0.3",
-    "note": "Forked Codex runtime merged into cowork plugin to avoid name collision with upstream codex plugin. Adds Windows-safe spawn (shell:true on win32), no sandbox by default, and project-aware routing."
+    "note": "Forked Codex runtime merged into cowork plugin to avoid name collision with the upstream plugin. Adds Windows-compatible spawn handling (shell:true on win32), no sandbox by default, and rescue-agent project context routing."
   }
 }

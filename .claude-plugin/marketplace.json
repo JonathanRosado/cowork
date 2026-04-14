@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "cowork",
-      "description": "Co-work protocol for Claude + Codex: independent drafts, mutual critique, provenance-routed implementation, settlement. Bundles a forked unrestricted Codex runtime (no sandbox, project-aware, Windows-safe spawn).",
+      "description": "Co-work protocol for Claude + Codex: independent drafts, mutual critique, provenance-routed implementation, settlement. Bundles a forked unrestricted Codex runtime with no sandbox, rescue-agent project context handoff, and Windows compatibility fixes.",
       "version": "1.2.0",
       "author": {
         "name": "Jonathan Rosado",
