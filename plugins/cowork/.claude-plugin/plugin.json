@@ -1,0 +1,14 @@
+{
+  "name": "cowork",
+  "version": "1.0.0",
+  "description": "Cowork is a protocol, not a background process. Three slash commands: /cowork (five-stage protocol — parallel research across 4 Codex + 1 Opus agents, dual plans with mutual critique converged into a master plan, Opus implementation, Codex adversarial review loop until sign-off), /cowork:question (10-agent parallel research — 8 Codex + 2 Opus — digested into a synthesized answer), /cowork:rescue (forward a stuck Claude turn to Codex with full project context, no sandbox, filesystem + network). All Codex dispatches run at gpt-5.4 xhigh through a forked unrestricted Codex runtime. No hooks, no background jobs, no implicit behavior — the protocol only runs when explicitly invoked.",
+  "author": {
+    "name": "Jonathan Rosado",
+    "url": "https://github.com/JonathanRosado"
+  },
+  "upstream": {
+    "name": "OpenAI",
+    "repo": "openai/codex-plugin-cc",
+    "note": "Cowork bundles a forked Codex runtime (codex-companion.mjs + scripts/lib) with the sandbox removed by default, full filesystem + network access, and Windows-compatible spawn handling. The slash commands in this plugin are original; only the Codex runtime is derived."
+  }
+}

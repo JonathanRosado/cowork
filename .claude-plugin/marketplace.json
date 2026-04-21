@@ -1,0 +1,23 @@
+{
+  "name": "cowork",
+  "owner": {
+    "name": "Jonathan Rosado",
+    "url": "https://github.com/JonathanRosado"
+  },
+  "metadata": {
+    "description": "Cowork — a protocol for Opus + Codex collaboration via three explicit slash commands.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "cowork",
+      "description": "Three slash commands: /cowork (full five-stage protocol: parallel research, dual plans with mutual critique, implementation, Codex adversarial review loop until sign-off), /cowork:question (10-agent research with Opus synthesis), /cowork:rescue (forward a stuck turn to Codex with full context and no sandbox). All Codex dispatches use gpt-5.4 at xhigh effort through a forked unrestricted Codex runtime.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Jonathan Rosado",
+        "url": "https://github.com/JonathanRosado"
+      },
+      "source": "./plugins/cowork"
+    }
+  ]
+}
